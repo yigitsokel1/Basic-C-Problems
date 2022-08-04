@@ -4,40 +4,49 @@
 
 int main(){
 
-	int randomNumber, digit, i=4, pos, neg, j;
+	int randomNumber, digit, i, pos, neg, j, count, control = 0;
 	int number = 0, random[5], numberDig[5];
 	
 	//Random number is generated
-	srand(time(NULL));
-	randomNumber = 3000 + rand() % 1000;
-	digit = randomNumber;
 	
-	//Digits are kept in array
-	while(i  > 0){
-		random[i] = digit % 10;
-		digit = digit - random[i];
-		digit = digit / 10;
-		i--;
+	while(control == 0){
+		srand(time(NULL));
+		randomNumber = 1000 + rand() % 9000;
+		digit = randomNumber;
+		control = 1;
+		//Digits are kept in array
+		i=3;
+		while(i >= 0){
+			random[i] = digit % 10;
+			digit = digit - random[i];
+			digit = digit / 10;
+			i--;
+		}
+		for(i=0;i<4;i++){
+			for(j=i+1;j<4;j++){
+				if(random[i] == random[j])
+					control = 0;
+			}
+		}
 	}
 	
-	
 	printf("Number : %d\n", randomNumber);
-	
 
 	while(number != randomNumber){
 		pos = 0;
 		neg = 0;
 		printf("Enter guess = ");
 		scanf("%d",&number);
+		count++;
 		digit = number;
-		i = 4;
-		while(i > 0){
+		i = 3;
+		while(i >= 0){
 		numberDig[i] = digit % 10;
 		digit = digit / 10;
 		i--;
 		}
-		for(i = 1; i<5; i++){
-			for(j = 1; j<5; j++){
+		for(i = 0; i<4; i++){
+			for(j = 0; j<4; j++){
 				if(random[i]==numberDig[j]){
 					if(i == j)
 						pos++;
@@ -49,7 +58,7 @@ int main(){
 		printf("+%d -- -%d\n", pos, neg);
 	}
 	 
-	printf("Correct result!!\n");
+	printf("Congrats :) You did it! number of total predictions: %d\n", count);
 	
 	return 0;
 
