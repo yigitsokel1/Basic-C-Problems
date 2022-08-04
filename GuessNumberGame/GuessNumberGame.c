@@ -55,7 +55,7 @@ int main(){
 				}
 			}
 		}
-		printf("+%d -- -%d\n", pos, neg);
+		printf("Hint: +%d-%d\n", pos, neg);
 	}
 	 
 	printf("Congrats :) You did it! number of total predictions: %d\n", count);
